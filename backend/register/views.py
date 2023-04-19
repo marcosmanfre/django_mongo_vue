@@ -3,9 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from register.models import Secao
-from register.serializers import SecaoSerializer
 
+from register.models import Secao, Jovem
+from register.serializers import SecaoSerializer, JovemSerializer
 from django.core.files.storage import default_storage
 
 
@@ -26,7 +26,7 @@ def secaoApi(request,id=0):
     
     elif request.method=='PUT':
         secao_data=JSONParser().parse(request)
-        secao=Secao.objects.get( secao_id=secao_data[' secao_id'])
+        secao=Secao.objects.get( secao_id=secao_data['secao_id'])
         secao_serializer=SecaoSerializer(secao,data=secao_data)
         if secao_serializer.is_valid():
             secao_serializer.save()
@@ -37,3 +37,20 @@ def secaoApi(request,id=0):
         secao=Secao.objects.get(secao_id=id)
         secao.delete()
         return JsonResponse("Deletado com sucesso",safe=False)
+
+
+@csrf_exempt
+def jovemApi(request,id=0):
+    if request.method=='GET':
+        jovem = Jovem.objects.all()
+        jovem_serializer=JovemSerializer(jovem,many=True)
+        return JsonResponse(jovem_serializer.data,safe=False)
+    
+        
+    elif request.method=='POST':
+        jovem_data=JSONParser().parse(request)
+        jovem_serializer=JovemSerializer(data=jovem_data)
+        if jovem_serializer.is_valid():
+            jovem_serializer.save()
+            return JsonResponse("Adicionado com sucesso",safe=False)
+        return JsonResponse("Erro ao adicionar",safe=False)

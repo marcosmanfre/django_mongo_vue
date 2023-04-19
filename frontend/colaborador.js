@@ -1,0 +1,1 @@
+const colaborador={template:`<h1>Bem vindo ao sistema de gerencimanto de Alunos</h1>`}
