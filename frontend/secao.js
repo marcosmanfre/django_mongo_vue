@@ -5,7 +5,7 @@ class="btn btn-primary m-2 fload-end"
 data-bs-toggle="modal"
 data-bs-target="#exampleModal"
 @click="addClick()">
- Add Department
+ Adicionar Seção
 </button>
 <table class="table table-striped">
 <thead>
@@ -30,7 +30,7 @@ data-bs-target="#exampleModal"
                 </svg>
                 </button>
             </div>
-            DepartmentId
+            ID Seção
         </th>
         <th>
             <div class="d-flex flex-row">
@@ -52,10 +52,10 @@ data-bs-target="#exampleModal"
                 </svg>
                 </button>
             </div>
-            DepartmentName
+            Seção
         </th>
         <th>
-            Options
+            Opções
         </th>
     </tr>
 </thead>
