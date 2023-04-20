@@ -5,7 +5,7 @@ class="btn btn-primary m-2 fload-end"
 data-bs-toggle="modal"
 data-bs-target="#exampleModal"
 @click="addClick()">
- Add Employee
+ Adicionar Jovem
 </button>
 <table class="table table-striped">
 <thead>
@@ -81,20 +81,20 @@ data-bs-target="#exampleModal"
     <div class="d-flex flex-row bd-highlight mb-3">
         <div class="p-2 w-50 bd-highlight">
             <div class="input-group mb-3">
-                <span class="input-group-text">Name</span>
-                <input type="text" class="form-control" v-model="EmployeeName">
+                <span class="input-group-text">Nome</span>
+                <input type="text" class="form-control" v-model="nome">
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Department</span>
-                <select class="form-select" v-model="Department">
+                <span class="input-group-text">Seção</span>
+                <select class="form-select" v-model="secao">
                     <option v-for="dep in departments">
-                    {{dep.DepartmentName}}
+                    {{dep.secao}}
                     </option>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">DOJ</span>
-                <input type="date" class="form-control" v-model="DateOfJoining">
+                <span class="input-group-text">Data</span>
+                <input type="date" class="form-control" v-model="data_nascimento">
             </div>
         </div>
         <div class="p-2 w-50 bd-highlight">
@@ -148,7 +148,7 @@ methods:{
         this.modalTitle="Add Employee";
         this.EmployeeId=0;
         this.EmployeeName="";
-        this.Department="",
+        this.secao="",
         this.DateOfJoining="",
         this.PhotoFileName="anonymous.png"
     },
@@ -156,7 +156,7 @@ methods:{
         this.modalTitle="Edit Employee";
         this.EmployeeId=emp.EmployeeId;
         this.EmployeeName=emp.EmployeeName;
-        this.Department=emp.Department,
+        this.secao=emp.secao,
         this.DateOfJoining=emp.DateOfJoining,
         this.PhotoFileName=emp.PhotoFileName
     },
@@ -176,7 +176,7 @@ methods:{
         axios.put(variables.API_URL+"employee",{
             EmployeeId:this.EmployeeId,
             EmployeeName:this.EmployeeName,
-            Department:this.Department,
+            secao:this.secao,
             DateOfJoining:this.DateOfJoining,
             PhotoFileName:this.PhotoFileName
         })
