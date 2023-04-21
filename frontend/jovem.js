@@ -150,7 +150,6 @@ methods:{
         this.EmployeeName="";
         this.secao="",
         this.DateOfJoining="",
-        this.PhotoFileName="anonymous.png"
     },
     editClick(emp){
         this.modalTitle="Edit Employee";
@@ -158,14 +157,12 @@ methods:{
         this.EmployeeName=emp.EmployeeName;
         this.secao=emp.secao,
         this.DateOfJoining=emp.DateOfJoining,
-        this.PhotoFileName=emp.PhotoFileName
     },
     createClick(){
         axios.post(variables.API_URL+"employee",{
             EmployeeName:this.EmployeeName,
             Department:this.Department,
             DateOfJoining:this.DateOfJoining,
-            PhotoFileName:this.PhotoFileName
         })
         .then((response)=>{
             this.refreshData();
@@ -178,7 +175,6 @@ methods:{
             EmployeeName:this.EmployeeName,
             secao:this.secao,
             DateOfJoining:this.DateOfJoining,
-            PhotoFileName:this.PhotoFileName
         })
         .then((response)=>{
             this.refreshData();
@@ -196,16 +192,8 @@ methods:{
         });
 
     },
-    imageUpload(event){
-        let formData=new FormData();
-        formData.append('file',event.target.files[0]);
-        axios.post(
-            variables.API_URL+"jovem/savefile",
-            formData)
-            .then((response)=>{
-                this.PhotoFileName=response.data;
-            });
-    }
+
+    
 
 },
 mounted:function(){
