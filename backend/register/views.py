@@ -58,14 +58,14 @@ def jovemApi(request,id=0):
 
     elif request.method=='PUT':
         jovem_data=JSONParser().parse(request)
-        jovem=Secao.objects.get( jovem_id=jovem_data['jovem_id'])
-        jovem_serializer=SecaoSerializer(jovem,data=jovem_data)
+        jovem=Jovem.objects.get( jovem_id=jovem_data['jovem_id'])
+        jovem_serializer=JovemSerializer(jovem,data=jovem_data)
         if jovem_serializer.is_valid():
             jovem_serializer.save()
             return JsonResponse("Atualizado com sucesso",safe=False)
         return JsonResponse("Erro ao atualizar")
     
     elif request.method=='DELETE':
-        jovem=Secao.objects.get(jovem_id=id)
+        jovem=Jovem.objects.get(jovem_id=id)
         jovem.delete()
         return JsonResponse("Deletado com sucesso",safe=False)

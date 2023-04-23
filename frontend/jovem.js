@@ -161,13 +161,12 @@ methods:{
         this.registro="";
         this.nome="";
         this.secao="",
-        this.promessa=""
-        this.data_nascimento=""
+        this.promessa="",
+        this.data_nascimento="",
         this.valor_mensalidade=""
     },
     editClick(emp){
         this.modalTitle="Editar Jovem";
-        this.jovem_id=emp.jovem_id;
         this.registro=emp.registro;
         this.nome=emp.nome;
         this.secao=emp.secao,
@@ -177,8 +176,12 @@ methods:{
     },
     createClick(){
         axios.post(variables.API_URL+"jovem",{
+            registro:this.registro,
             nome:this.nome,
             secao:this.secao,
+            promessa:this.promessa,
+            data_nascimento:this.data_nascimento,
+            valor_mensalidade:this.valor_mensalidade
 
         })
         .then((response)=>{
@@ -188,10 +191,12 @@ methods:{
     },
     updateClick(){
         axios.put(variables.API_URL+"jovem",{
-            jovem_id:this.jovem_id,
+            registro:this.registro,
             nome:this.nome,
             secao:this.secao,
-            DateOfJoining:this.DateOfJoining,
+            promessa:this.promessa,
+            data_nascimento:this.data_nascimento,
+            valor_mensalidade:this.valor_mensalidade
         })
         .then((response)=>{
             this.refreshData();

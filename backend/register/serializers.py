@@ -11,9 +11,3 @@ class JovemSerializer(serializers.ModelSerializer):
     class Meta:
         model=Jovem
         fields=('jovem_id', 'registro', 'nome', 'secao', 'promessa', 'data_nascimento', 'valor_mensalidade')
-
-
-#class ColaboradorSerializer(serializers.ModelSerializer):
-   # class Meta:
-   #     model=Colaborador
-    #    fields=('colab_id', 'registro', 'nome', 'secao', 'data_nascimento', 'funcao', 'reuniao')
