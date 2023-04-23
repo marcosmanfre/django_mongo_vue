@@ -80,6 +80,11 @@ data-bs-target="#exampleModal"
     <div class="modal-body">
     <div class="d-flex flex-row bd-highlight mb-3">
         <div class="p-2 w-50 bd-highlight">
+        
+            <div class="input-group mb-3">
+                <span class="input-group-text">Registro</span>
+                <input type="text" class="form-control" v-model="registro">
+            </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Nome</span>
                 <input type="text" class="form-control" v-model="nome">
@@ -88,28 +93,34 @@ data-bs-target="#exampleModal"
                 <span class="input-group-text">Seção</span>
                 <select class="form-select" v-model="secao">
                     <option v-for="dep in departments">
-                    {{dep.secao}}
+                    {{dep.secao_nome}}
                     </option>
-                </select>
+                </select>            
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Promessa</span>
+                <input type="text" class="form-control" v-model="promessa">
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Data</span>
+                <span class="input-group-text">Data Nascimento</span>
                 <input type="date" class="form-control" v-model="data_nascimento">
             </div>
+
+            <div class="input-group mb-3">
+            <span class="input-group-text">Valor Mensalidade</span>
+            <input type="number" class="form-control" v-model="valor_mensalidade">
         </div>
-        <div class="p-2 w-50 bd-highlight">
-            <img width="250px" height="250px"
-                :src="PhotoPath+PhotoFileName"/>
-            <input class="m-2" type="file" @change="imageUpload">
         </div>
+    
     </div>
         <button type="button" @click="createClick()"
-        v-if="EmployeeId==0" class="btn btn-primary">
-        Create
+        v-if="jovem_id==0" class="btn btn-primary">
+        Adicionar
         </button>
         <button type="button" @click="updateClick()"
-        v-if="EmployeeId!=0" class="btn btn-primary">
-        Update
+        v-if="jovem_id!=0" class="btn btn-primary">
+        Atualizar
         </button>
     </div>
 </div>
@@ -128,7 +139,7 @@ data(){
         secao:"",
         promessa:"",
         data_nascimento:"",
-        Valor_mensalidade:"",
+        valor_mensalidade:"",
 
     }
 },
@@ -145,24 +156,30 @@ methods:{
         });
     },
     addClick(){
-        this.modalTitle="Add Employee";
-        this.EmployeeId=0;
-        this.EmployeeName="";
+        this.modalTitle="Adicionar Jovem";
+        this.jovem_id=0;
+        this.registro="";
+        this.nome="";
         this.secao="",
-        this.DateOfJoining="",
+        this.promessa=""
+        this.data_nascimento=""
+        this.valor_mensalidade=""
     },
     editClick(emp){
-        this.modalTitle="Edit Employee";
-        this.EmployeeId=emp.EmployeeId;
-        this.EmployeeName=emp.EmployeeName;
+        this.modalTitle="Editar Jovem";
+        this.jovem_id=emp.jovem_id;
+        this.registro=emp.registro;
+        this.nome=emp.nome;
         this.secao=emp.secao,
-        this.DateOfJoining=emp.DateOfJoining,
+        this.promessa=emp.promessa,
+        this.data_nascimento=emp.data_nascimento,
+        this.valor_mensalidade=emp.valor_mensalidade
     },
     createClick(){
-        axios.post(variables.API_URL+"employee",{
-            EmployeeName:this.EmployeeName,
-            Department:this.Department,
-            DateOfJoining:this.DateOfJoining,
+        axios.post(variables.API_URL+"jovem",{
+            nome:this.nome,
+            secao:this.secao,
+
         })
         .then((response)=>{
             this.refreshData();
@@ -170,9 +187,9 @@ methods:{
         });
     },
     updateClick(){
-        axios.put(variables.API_URL+"employee",{
-            EmployeeId:this.EmployeeId,
-            EmployeeName:this.EmployeeName,
+        axios.put(variables.API_URL+"jovem",{
+            jovem_id:this.jovem_id,
+            nome:this.nome,
             secao:this.secao,
             DateOfJoining:this.DateOfJoining,
         })
@@ -182,7 +199,7 @@ methods:{
         });
     },
     deleteClick(id){
-        if(!confirm("Are you sure?")){
+        if(!confirm("Tem certeza que deseja deletar?")){
             return;
         }
         axios.delete(variables.API_URL+"jovem/"+id)

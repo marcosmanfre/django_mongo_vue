@@ -2,7 +2,7 @@
 const routes=[
     {path:'/home',component:home},
     {path:'/secao',component:secao},
-    {path:'/jovem',component:jovem},
+    {path:'/jovem',component:jovem}
     //{path:'/colaborador',component:colaborador}
 ]
 
